@@ -4,6 +4,7 @@ const { connectDB } = require ('./startup/db');
 
 //routes
 const customers = require('./routes/customers'); 
+const products = require('./routes/products'); 
 
 //Express Middleware 
 app.use(express.json());
@@ -11,6 +12,7 @@ app.use(express.json());
 connectDB();
 
 app.use('/api/customers', customers);
+app.use('/api/products', products);
 require('./startup/prod')(app);
 
 
