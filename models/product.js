@@ -24,7 +24,7 @@ const productSchema = new mongoose.Schema({
         type: String,
         required: true,
         minlength: 2,
-        maxlength: 50
+        maxlength: 250
     }
 });
 
@@ -42,6 +42,19 @@ function validateProduct(product) {
     return schema.validate(product);
   }
 
+  function validateUpdateProduct(upProduct) {
+    const schema = Joi.object({
+      product_id: Joi.string().min(2).max(50),
+      item: Joi.string().min(2).max(50),
+      price: Joi.number().precision(2).min(2).max(50),
+      description: Joi.string().min(2).max(50),
+    });
+    
+    
+    return schema.validate(upProduct);
+  }
+
   exports.Product = Product;
   exports.validate = validateProduct;
+  exports.validateUpdate = validateUpdateProduct;
   exports.customerSchema = productSchema;
