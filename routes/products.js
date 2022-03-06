@@ -55,4 +55,14 @@ router.delete('/:id', async (req, res) => {
 
 });
 
+router.get('/productID?:product_id', async (req, res) => {
+  const product = await Product.find({product_id: req.query.product_id});
+
+  if (!product) return res.status(404).send('The item with the given ID does not exist!');
+
+  
+
+  res.send(product);
+}); 
+
 module.exports = router;

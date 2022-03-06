@@ -33,6 +33,20 @@ function validateCustomer(customer) {
     return schema.validate(customer);
   }
 
+  function validateUpdateCustomer(upCustomer) {
+    const schema = Joi.object({
+      name: Joi.string().min(2).max(50),
+      email: Joi.string().email().min(2).max(50),
+      phone: Joi.string().min(2).max(50),
+    });
+    
+    
+    return schema.validate(upCustomer);
+  }
+
+  
+
   exports.Customer = Customer;
   exports.validate = validateCustomer;
+  exports.validateUpdate = validateUpdateCustomer;
   exports.customerSchema = customerSchema;
