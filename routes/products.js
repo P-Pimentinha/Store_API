@@ -20,7 +20,8 @@ product = new Product({
     product_id: req.body.product_id,
     item: req.body.item,
     price: req.body.price,
-    description: req.body.description
+    description: req.body.description,
+    stock: req.body.stock
   });
 
   await product.save();
@@ -37,7 +38,8 @@ router.put('/:id', async (req, res) => {
     product_id: req.body.product_id,
     item: req.body.item,
     price: req.body.price,
-    description: req.body.description }, {
+    description: req.body.description,
+    stock: req.body.stock }, {
     new: true
   });
 
@@ -59,8 +61,6 @@ router.get('/productID?:product_id', async (req, res) => {
   const product = await Product.find({product_id: req.query.product_id});
 
   if (!product) return res.status(404).send('The item with the given ID does not exist!');
-
-  
 
   res.send(product);
 }); 

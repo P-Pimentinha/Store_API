@@ -1,3 +1,4 @@
+const { number } = require('joi');
 const Joi = require('joi');
 const mongoose = require('mongoose');
 
@@ -25,7 +26,11 @@ const productSchema = new mongoose.Schema({
         required: true,
         minlength: 2,
         maxlength: 250
-    }
+    },
+    stock: {
+        type: Number,
+        required: true,
+    },
 });
 
 const Product = mongoose.model('Products', productSchema);
@@ -34,8 +39,9 @@ function validateProduct(product) {
     const schema = Joi.object({
       product_id: Joi.string().min(2).max(50).required(),
       item: Joi.string().min(2).max(50).required(),
-      price: Joi.number().precision(2).min(2).max(50).required(),
+      price: Joi.number().precision(2).required(),
       description: Joi.string().min(2).max(50).required(),
+      stock: Joi.number().required(),
     });
     
     
@@ -46,8 +52,9 @@ function validateProduct(product) {
     const schema = Joi.object({
       product_id: Joi.string().min(2).max(50),
       item: Joi.string().min(2).max(50),
-      price: Joi.number().precision(2).min(2).max(50),
+      price: Joi.number().precision(2),
       description: Joi.string().min(2).max(50),
+      stock: Joi.number(),
     });
     
     
