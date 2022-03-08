@@ -33,6 +33,9 @@ router.put('/:id', async (req, res) => {
   const { error } = validateUpdate(req.body); 
   if (error) return res.status(400).send(error.details[0].message);
 
+  const emailCheck = await Customer.findOne({email: req.body.email});
+  if (emailCheck) return res.status(400).send('Email already registered');
+
   const customer = await Customer.findByIdAndUpdate(req.params.id, { 
     name: req.body.name,
     email: req.body.email,

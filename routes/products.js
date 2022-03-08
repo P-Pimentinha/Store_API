@@ -34,6 +34,9 @@ router.put('/:id', async (req, res) => {
   const { error } = validateUpdate(req.body); 
   if (error) return res.status(400).send(error.details[0].message);
 
+  const productCheck = await Product.findOne({product_id: req.body.product_id});
+  if (productCheck) return res.status(400).send('The given ID is already registered');
+
   let product = await Product.findByIdAndUpdate(req.params.id, { 
     product_id: req.body.product_id,
     item: req.body.item,
