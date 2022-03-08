@@ -8,13 +8,14 @@ const products = require('./routes/products');
 const sales = require('./routes/sales'); 
 
 //Express Middleware 
-app.use(express.json());
+/* app.use(express.json()); */
 //DataBase connection
 connectDB();
 
-app.use('/api/customers', customers);
+/* app.use('/api/customers', customers);
 app.use('/api/products', products);
-app.use('/api/sales', sales);
+app.use('/api/sales', sales); */
+require('./startup/routes')(app);
 require('./startup/prod')(app);
 
 
