@@ -1,15 +1,14 @@
 const Joi = require('joi');
 const mongoose = require('mongoose');
 
-
 const Sale = mongoose.model('Sales', new mongoose.Schema({
     customer: {
         type:new mongoose.Schema({
             name: {
-                type:String,
-        required: true,
-        minlength: 2,
-        maxlength: 50
+            type:String,
+            required: true,
+            minlength: 2,
+            maxlength: 50
             }
         }),
         required: true
@@ -35,8 +34,6 @@ const Sale = mongoose.model('Sales', new mongoose.Schema({
         required: true,
     }
 }));
-
-
 
 function validateSale(sale) {
     const schema = {

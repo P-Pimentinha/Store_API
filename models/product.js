@@ -44,7 +44,6 @@ function validateProduct(product) {
       stock: Joi.number().required(),
     });
     
-    
     return schema.validate(product);
   }
 
@@ -56,7 +55,6 @@ function validateProduct(product) {
       description: Joi.string().min(2).max(50),
       stock: Joi.number(),
     });
-    
     
     return schema.validate(upProduct);
   }

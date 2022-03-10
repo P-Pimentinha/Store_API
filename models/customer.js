@@ -40,12 +40,10 @@ function validateCustomer(customer) {
       phone: Joi.string().min(2).max(50),
     });
     
-    
     return schema.validate(upCustomer);
   }
 
   
-
   exports.Customer = Customer;
   exports.validate = validateCustomer;
   exports.validateUpdate = validateUpdateCustomer;
