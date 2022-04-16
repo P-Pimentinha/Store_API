@@ -1,6 +1,7 @@
 
 const config = require('config');
 const _ = require('lodash');
+const bcrypt = require('bcrypt');
 const express = require('express');
 const router = express.Router();
 const { User, validate } = require('../models/user')
@@ -24,16 +25,14 @@ router.post('/', async (req, res) => {
 
     user = new User(_.pick(req.body, ['name', 'email', 'password']));
     
-
+    //bcrypt is used to hash the password
+   const salt = await bcrypt.genSalt(10);
+    user.password = await bcrypt.hash(user.password, salt);
+    await user.save();
+    
     await user.save();
 
     res.send(_.pick(user, ['_id', 'name', 'email']));
-
-    //bcrypt is used to hash the password
-    /* const salt = await bcrypt.genSalt(10);
-    user.password = await bcrypt.hash(user.password, salt);
-    await user.save(); */
-    
     
    /*  const token = user.generateAuthToken();
     //.pick returns an object that contains only the properties passed to it from another object. 
