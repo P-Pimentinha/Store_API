@@ -1,4 +1,5 @@
 {
-    "db": "mongodb://localhost/store"
+    "db": "mongodb://localhost/store",
+    "jstPrivateKey": ""
 }
 
