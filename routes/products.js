@@ -1,4 +1,5 @@
 const express = require('express');
+const auth = require ('../middleware/auth');
 const router = express.Router();
 const { Product, validate, validateUpdate } = require('../models/product');
 
@@ -8,7 +9,7 @@ router.get('/', async (req, res) => {
   });
 
 
-router.post('/', async (req,res) => {
+router.post('/',auth, async (req,res) => {
 
 const { error } = validate(req.body); 
 if (error) return res.status(400).send(error.details[0].message);
@@ -29,7 +30,7 @@ product = new Product({
   res.send(product);
 });
 
-router.put('/:id', async (req, res) => {
+router.put('/:id',auth, async (req, res) => {
   
   const { error } = validateUpdate(req.body); 
   if (error) return res.status(400).send(error.details[0].message);
@@ -51,7 +52,7 @@ router.put('/:id', async (req, res) => {
   res.send(product);
 });
 
-router.delete('/:id', async (req, res) => {
+router.delete('/:id',auth, async (req, res) => {
   const product = await Product.findByIdAndRemove(req.params.id);
 
   if (!product) return res.status(404).send('The customer with the given ID was not found.');

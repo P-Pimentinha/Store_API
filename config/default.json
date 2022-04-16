@@ -1,5 +1,5 @@
 {
     "db": "mongodb://localhost/store",
-    "jstPrivateKey": ""
+    "jwtPrivateKey": "vidly_jwtPrivateKey"
 }
 

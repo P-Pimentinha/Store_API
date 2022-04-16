@@ -1,4 +1,4 @@
 {
     "db": "store_db",
-    "jstPrivateKey": "vidly_jwtPrivateKey"
+    "jwtPrivateKey": "vidly_jwtPrivateKey"
 }

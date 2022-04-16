@@ -1,5 +1,4 @@
-const jwt = require('jsonwebtoken');
-const config = require('config');
+const auth = require ('../middleware/auth');
 const _ = require('lodash');
 const bcrypt = require('bcrypt');
 const express = require('express');
@@ -7,11 +6,17 @@ const router = express.Router();
 const { User, validate } = require('../models/user')
 const mongoose = require('mongoose');
 
-/* router.get('/me', async (req, res) => {
+/* router.get('/me', auth, async (req, res) => {
 
   const user = await User.findById(req.user._id).select('-password');
   res.send(user);
-}) */
+}); */
+
+router.get('/me', auth, async (req, res) => {
+
+  const user = await User.findById(req.user._id).select('-password');
+  res.send(user);
+});
 
 router.post('/', async (req, res) => {
 
@@ -31,7 +36,7 @@ router.post('/', async (req, res) => {
     await user.save();
     
     await user.save();
-    
+
     const token = user.generateAuthToken(); 
     //.pick returns an object that contains only the properties passed to it from another object. 
     res.header('x-auth-token', token).send(_.pick(user, ['_id', 'name', 'email']));

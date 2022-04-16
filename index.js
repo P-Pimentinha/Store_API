@@ -3,7 +3,7 @@ const config = require('config');
 const app = express();
 const { connectDB } = require ('./startup/db');
 
-if(!config.get('jstPrivateKey')) {
+if(!config.get('jwtPrivateKey')) {
     console.error('Fatal Error:JWT is not defined.');
     process.exit(1);
 }
